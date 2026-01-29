@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Java TODO App</title>
+    <title>To-Do Application</title>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
 
-<h1>Java TODO App</h1>
+<header>
+    <h1>Welcome to To-Do App</h1>
+    <p>Plan • Track • Complete</p>
+</header>
 
-<form action="/add" method="post">
-    <input type="text" name="task" placeholder="Enter a todo" required />
-    <button type="submit">Add</button>
-</form>
+<div class="container">
 
-<hr/>
+    <form action="/add" method="post">
+        <input type="text" name="task" placeholder="What do you want to do?" required />
+        <button type="submit">Add Task</button>
+    </form>
 
-<ul>
-    <li th:each="todo : ${todos}">
-        <span th:text="${todo.task}"></span>
-    </li>
-</ul>
+    <ul>
+        <li th:each="todo : ${todos}">
+            <span th:text="${todo.task}"></span>
+            <form th:action="@{/delete/{id}(id=${todo.id})}" method="post">
+                <button class="delete-btn">Delete</button>
+            </form>
+        </li>
+    </ul>
+
+</div>
+
+<footer>
+    <p>Java To-Do App • Version 1.0.0</p>
+</footer>
 
 </body>
 </html>

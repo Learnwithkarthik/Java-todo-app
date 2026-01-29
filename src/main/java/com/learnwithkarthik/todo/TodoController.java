@@ -2,7 +2,9 @@ package com.learnwithkarthik.todo;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -12,11 +14,13 @@ public class TodoController {
     private final Map<Long, Todo> todos = new HashMap<>();
     private final AtomicLong counter = new AtomicLong();
 
+    // Get all todos
     @GetMapping
     public Collection<Todo> getTodos() {
         return todos.values();
     }
 
+    // Add a new todo
     @PostMapping
     public Todo addTodo(@RequestBody Map<String, String> body) {
         Long id = counter.incrementAndGet();
@@ -25,8 +29,10 @@ public class TodoController {
         return todo;
     }
 
+    // Delete a todo by id
     @DeleteMapping("/{id}")
     public void deleteTodo(@PathVariable Long id) {
         todos.remove(id);
     }
 }
+

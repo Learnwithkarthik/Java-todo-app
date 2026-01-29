@@ -28,5 +28,12 @@ public class TodoUiController {
         todoController.addTodo(Map.of("task", task));
         return "redirect:/";
     }
+
+    @PostMapping("/delete/{id}")
+    public String deleteTodo(@PathVariable Long id) {
+        todoController.deleteTodo(id);
+        return "redirect:/";
+    }
+
 }
 
